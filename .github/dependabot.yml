@@ -1,0 +1,23 @@
+version: 2
+
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'build'
+    labels:
+      - 'area: build & ci'
+      - 'target: patch'
+      - 'action: merge'
+    # Disable version updates
+    # This does not affect security updates
+    open-pull-requests-limit: 0
