@@ -1,0 +1,54 @@
+<mat-card style="margin-bottom:15px;padding:25px;width:auto;padding-top:15px;">
+  <div style="display:inline-flex;width:100%">
+    <mat-card-title style="font-size: 18px;width:90%;display:inline-flex">
+      Username
+    </mat-card-title>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="loading" style="position: absolute;left: 0;width: 100%;">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <mat-card-content style="font-size: 14px; padding-top:15px;">
+    <form [formGroup]="usernameFormGroup" [class]="loading ? 'disabled' : ''">
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Current Username</mat-label>
+          <input type="text" matInput value={{authService.getUser()}} disabled />
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>New Username</mat-label>
+          <input type="text" id="update-username-input1" autocomplete="new-username" matInput
+            formControlName="usernameCtrl" cdkFocusInitialte required />
+          <mat-error *ngIf="userHasError('usernameCtrl', 'required')">Username is required</mat-error>
+          <mat-error *ngIf="userHasError('usernameCtrl', 'used')">{{this.usernameFormGroup.get("usernameCtrl")?.value}} is already in use</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Current Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" autocomplete="password"
+           id="update-username-input0" formControlName="passwordCtrl" required />
+          <a mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword"
+            (keydown.enter)="$event.preventDefault()" [title]="!hidePassword ? 'Hide password' : 'Show password'">
+            <mat-icon class="scale15">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </a>
+          <mat-error *ngIf="userHasError('passwordCtrl', 'invalid')">Password is invalid</mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <div>
+        <button class="center-button" mat-raised-button color="primary" (click)="validateUsername()"
+          [disabled]="loading ||
+           this.usernameFormGroup.get('usernameCtrl')?.errors ||
+           this.usernameFormGroup.get('passwordCtrl')?.errors ||
+           !this.usernameFormGroup.dirty ||
+           this.getUsername() == authService.getUser()">
+          Update Username
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

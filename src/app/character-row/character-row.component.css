@@ -1,0 +1,13 @@
+.char-row {
+  padding: 10px;
+}
+
+.char-row-link {
+  margin-left: -15px;
+  margin-right: -15px;
+  cursor: pointer;
+}
+
+div.char-row-link:hover {
+  background-color: rgba(240, 248, 255, 0.123);
+}

@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="center-column" style="max-width:450px">
+    <mat-card class="paperdoll-card">
+      <mat-card-title>
+        <h2 class="paperdoll-text" [innerHtml]="this.sanitizer.bypassSecurityTrustHtml(this.fullCharName)"></h2>
+        <h2 class="paperdoll-text">{{character?.guild ? "<" + character?.guild + ">" : ""}}</h2>
+      </mat-card-title>
+      <!-- <mat-spinner class="loader top100" diameter="150" [style.display]="loadingItems.includes(true) ? 'block' : 'none'" ></mat-spinner> -->
+      <div class="paperdoll">
+        <div class="paperdoll-column paperdoll-left">
+          <a *ngFor="let slot of slots.slice(0, 8)" href="http://wotlk.cavernoftime.com/item={{getItem(slot)}}"
+            rel="item={{getItem(slot)}}&ench={{getEnchantId(slot)}}&gems={{getGems(slot)}}&pcs={{getPcs(slot)}}&transmog={{getTransmog(slot)}}">
+            <div class="slot-icon-background" [style.background-image]="'url(\'' + getBackgroundIcon(slot) + '\')'">
+              <div class="slot-icon-box">
+                <img class="slot-icon" *ngIf="!loadingItems[slot]" src="{{getIcon(slot) ? getIcon(slot) : blankImage}}">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div id="model_3d" class="model3d" [hidden]="loadedScreenshot"></div>
+        <img class="model3d" [src]="stillImage" [hidden]="!loadedScreenshot"/>
+        <div class="paperdoll-column paperdoll-right">
+          <a *ngFor="let slot of slots.slice(8, 16)" href="http://wotlk.cavernoftime.com/item={{getItem(slot)}}"
+            rel="item={{getItem(slot)}}&ench={{getEnchantId(slot)}}&gems={{getGems(slot)}}&pcs={{getPcs(slot)}}&transmog={{getTransmog(slot)}}">
+            <div class="slot-icon-background" [style.background-image]="'url(\'' + getBackgroundIcon(slot) + '\')'">
+              <div class="slot-icon-box">
+                <img class="slot-icon" *ngIf="!loadingItems[slot]" src="{{getIcon(slot)}}">
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="paperdoll-bottom">
+        <a *ngFor="let slot of slots.slice(16, 19)" href="http://wotlk.cavernoftime.com/item={{getItem(slot)}}"
+          rel="item={{getItem(slot)}}&ench={{getEnchantId(slot)}}&gems={{getGems(slot)}}&pcs={{getPcs(slot)}}&transmog={{getTransmog(slot)}}">
+          <div class="slot-icon-background" [style.background-image]="'url(\'' + getBackgroundIcon(slot) + '\')'">
+            <div class="slot-icon-box">
+              <img class="slot-icon" *ngIf="!loadingItems[slot]" src="{{getIcon(slot)}}">
+            </div>
+          </div>
+        </a>
+      </div>
+    </mat-card>
+  </div>
+  <div class="center-column" style="max-width:450px">
+    <app-stats [stats]=character.stats [arenaTeams]=character.arenaTeams></app-stats>
+  </div>
+</div>

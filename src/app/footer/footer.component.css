@@ -1,0 +1,8 @@
+.footer {
+  margin-top:auto;
+  bottom: 0px;
+  /* Set the fixed height of the footer here */
+  height: 56px;
+  line-height: 30px;
+  text-align: center;
+}

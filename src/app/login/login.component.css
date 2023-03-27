@@ -1,0 +1,18 @@
+.login-card {
+  min-width: 300px;
+  width: 20%;
+  display: block;
+  margin: auto;
+}
+.field-container {
+  padding-bottom: 20px;
+}
+.login-button {
+  display: block;
+  width: 95%;
+  margin: auto !important;
+}
+.errorText {
+  color:rgb(226, 90, 90);
+  padding-left:10px;
+}

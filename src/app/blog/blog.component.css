@@ -1,0 +1,22 @@
+.rightFloat {
+  left: auto;
+  display: inline-flex;
+}
+.EditButton {
+  margin-left: 10px;
+  font-size: 11px;
+  height: 20px !important;
+  line-height: 12px !important;
+}
+
+.staffLogo {
+  width: 27px;
+  height: 15px;
+  padding-top: 2px;
+  padding-left: 10px;
+  filter: drop-shadow(0px 0px 1px #000000);
+}
+
+.blueText {
+  filter: drop-shadow(0px 0px 1px #000000);
+}

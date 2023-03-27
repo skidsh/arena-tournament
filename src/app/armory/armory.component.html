@@ -1,0 +1,81 @@
+<div class="centered">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Search Characters</mat-label>
+    <input type="search" matInput id="char-search" [(ngModel)]="searchValue" (keydown.enter)="searchButton()" />
+    <button matSuffix mat-icon-button aria-label="Search button" (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-card class="results">
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let element" [ngStyle]="{'color': classColors.get(element.class)}">{{element.name}}
+          </td>
+        </ng-container>
+
+        <!-- Race Column -->
+        <ng-container matColumnDef="race">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Race </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="icon" src='../assets/race/{{races.get(element.race)}}-{{gender.get(element.gender)}}.webp'
+              title="{{races.get(element.race)}}">
+          </td>
+        </ng-container>
+
+        <!-- Class Column -->
+        <ng-container matColumnDef="class">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="icon" src='../assets/class/64/{{classes.get(element.class)}}.png'
+             title="{{classes.get(element.class)}}">
+          </td>
+        </ng-container>
+
+        <!-- Spec Column -->
+        <ng-container matColumnDef="spec">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Spec </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="icon" src='../assets/spec/{{element.spec.toLowerCase() == "none" ? "" : classes.get(element.class)}}/{{element.spec.toLowerCase()}}.png' title="{{element.spec}}">
+          </td>
+        </ng-container>
+
+        <!-- 2s team Column -->
+        <ng-container matColumnDef="twos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 2v2 </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let team of element.arenaTeams">
+              <div *ngIf="team.type === 2">
+                {{ team.personalRating }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- 3s team Column -->
+        <ng-container matColumnDef="threes">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 3v3 </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngFor="let team of element.arenaTeams">
+              <div *ngIf="team.type === 3">
+                {{ team.personalRating }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="row-clickable" mat-row *matRowDef="let row; columns: displayedColumns;"
+          [routerLink]="['/armory/'+row.name]"></tr>
+      </table>
+      <mat-spinner *ngIf="loading" diameter="70" class="loader"></mat-spinner>
+      <div *ngIf="error != ''">{{error}}</div>
+    </div>
+    <div class="float-left">Loaded in {{time}}ms</div>
+    <mat-paginator class="paginator" [length]="length" [pageSize]="pageSize" (page)="pageEvent = changePage($event)"
+      aria-label="Select page">
+    </mat-paginator>
+  </mat-card>
+</div>

@@ -1,0 +1,36 @@
+<div class="nowrap">
+  <mat-card class="login-card">
+    <mat-card-title style="padding-bottom: 10px">Login</mat-card-title>
+    <mat-divider></mat-divider>
+    <div *ngIf="loading" style="width: 332px; margin-left: -16px">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <br />
+    <mat-card-content>
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Username</mat-label>
+          <input type="text" #user autocomplete="username" matInput tabindex="1" autoFocusAT required />
+        </mat-form-field>
+        <a href="/recover/user" style="font-size: 10px">Recover Username</a>
+      </div>
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Password</mat-label>
+          <input matInput #pass [type]="hidePassword ? 'password' : 'text'" autocomplete="password" tabindex="3" required/>
+          <a mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="0" [attr.aria-label]="'Hide password'" (keydown.enter)="$event.preventDefault()"
+          [title]="!hidePassword ? 'Hide password' : 'Show password'">
+          <mat-icon class="scale15">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </a>
+        </mat-form-field>
+        <a href="/recover/pass" style="font-size: 10px">Recover Password</a>
+      </div>
+      <mat-card-actions>
+        <p class="errorText" *ngIf="this.invalid">Invalid username or password</p>
+        <button #login mat-raised-button color="primary" class="login-button" (click)="auth()">
+          Login
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

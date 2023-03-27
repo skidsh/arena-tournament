@@ -1,0 +1,42 @@
+<mat-toolbar class ="nav-bar" color="primary" flex>
+    <button mat-button routerLink="/" >
+      <img class='logo25' src='../assets/wow40.png'>
+      <span style="margin-top: 19px;">Arena Tournament</span>
+    </button>
+    <button mat-button routerLink="/help" routerLinkActive #rla2="routerLinkActive">
+        How to play
+        <mat-divider *ngIf="rla2.isActive"></mat-divider>
+    </button>
+    <button mat-button routerLink="/status" routerLinkActive #rla3="routerLinkActive">
+        Status
+        <mat-divider *ngIf="rla3.isActive"></mat-divider>
+    </button>
+    <button mat-button [matMenuTriggerFor]="armory">
+        Armory
+        <mat-divider *ngIf="rla4.isActive || rla5.isActive"></mat-divider>
+    </button>
+    <mat-menu #armory="matMenu">
+        <button mat-menu-item routerLink="/armory" routerLinkActive #rla4="routerLinkActive">Character Search</button>
+        <button mat-menu-item routerLink="/ladder" routerLinkActive #rla5="routerLinkActive">Arena Ladder</button>
+    </mat-menu>
+    <button mat-button (click)="snackBar.openSnackBarAndCopy('set realmlist logon.arena-tournament.net', 'close')">
+      Realmlist
+    </button>
+    <div class="spacer"></div>
+    <button *ngIf="!this.authService.isLoggedIn" mat-button routerLink="/register" routerLinkActive #rla1="routerLinkActive">
+        Register
+        <mat-divider *ngIf="rla1.isActive"></mat-divider>
+    </button>
+    <button *ngIf="!this.authService.isLoggedIn" mat-button routerLink="/login" routerLinkActive #rla6="routerLinkActive">
+      Login
+      <mat-divider *ngIf="rla6.isActive"></mat-divider>
+  </button>
+  <button *ngIf="this.authService.isLoggedIn" [matMenuTriggerFor]="loginMenu" mat-button routerLinkActive #rla7="routerLinkActive">
+    {{this.authService.getUser()}}
+    <mat-menu #loginMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">Profile</button>
+      <button mat-menu-item (click)="this.authService.logout()">Logout</button>
+    </mat-menu>
+    <mat-divider *ngIf="rla7.isActive"></mat-divider>
+  </button>
+</mat-toolbar>

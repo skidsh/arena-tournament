@@ -1,0 +1,55 @@
+<mat-card style="margin-bottom:15px;padding:25px;width:auto;padding-top:15px;">
+  <div style="display:inline-flex;width:100%">
+    <mat-card-title style="font-size: 18px;width:90%;display:inline-flex">
+      Email
+    </mat-card-title>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="loading" style="position: absolute;left: 0;width: 100%;">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <mat-card-content style="font-size: 14px; padding-top:15px;">
+    <form [formGroup]="emailFormGroup">
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Current Email</mat-label>
+          <input type="text" matInput value={{authService.getEmail()}} disabled />
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <mat-form-field class="full-field" floatLabel="never">
+          <mat-label>Email</mat-label>
+          <input id="update-email-input1" type="email" autocomplete="email" matInput formControlName="emailCtrl"
+            pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required />
+          <mat-error *ngIf="emailHasError('emailCtrl', 'required')">Email is required</mat-error>
+          <mat-error *ngIf="emailHasError('emailCtrl', 'pattern')">Invalid email</mat-error>
+          <mat-error *ngIf="emailHasError('emailCtrl', 'used')">
+            {{this.emailFormGroup.get("emailCtrl")?.value}} is already in use
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="field-container">
+        <mat-form-field class="full-field">
+          <mat-label>Current Password</mat-label>
+          <input matInput [type]="hideCurrPassword ? 'password' : 'text'" autocomplete="new-password"
+            formControlName="currentPasswordCtrl" id="update-email-input0" required />
+          <a mat-icon-button matSuffix (click)="hideCurrPassword = !hideCurrPassword"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCurrPassword"
+            (keydown.enter)="$event.preventDefault()" [title]="!hideCurrPassword ? 'Hide password' : 'Show password'">
+            <mat-icon class="scale15">{{hideCurrPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </a>
+          <mat-error *ngIf="emailHasError('currentPasswordCtrl', 'required')">Password is required</mat-error>
+          <mat-error *ngIf="emailHasError('currentPasswordCtrl', 'invalid')">Password is invalid</mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <button class="center-button" mat-raised-button color="primary" (click)="updateEmail()"
+        (keydown.enter)="updateEmail()" [disabled]="loading ||
+        this.emailFormGroup.get('emailCtrl')?.errors ||
+        this.emailFormGroup.get('currentPasswordCtrl')?.errors ||
+        !this.emailFormGroup.dirty">
+        Update Email
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,54 @@
+<div>
+  <h2>News</h2>
+  <mat-card *ngIf="loading">
+    <mat-spinner diameter="70" class="loader"></mat-spinner>
+  </mat-card>
+  <span *ngIf="!loading">
+    <mat-card *ngFor="let post of posts; let i = index;" style="margin-bottom:15px;padding-bottom:5px;">
+      <div style="display:inline-flex;width:100%">
+        <mat-card-title style="font-size: 18px;width:90%;display:inline-flex">
+          <span *ngIf="!editing[i]">{{post.title}}</span>
+          <mat-form-field style="width:70%;margin-bottom: -20px;" floatLabel="always" *ngIf="editing[i]">
+            <mat-label>Title</mat-label>
+            <input type="text" matInput value="{{post.title}}" autoFocusAT [(ngModel)]="post.title">
+          </mat-form-field>
+        </mat-card-title>
+          <div class="rightFloat" style="padding-bottom: 9px;">
+            <button mat-raised-button style="color: white;" class="EditButton" disabled><span class="blueText" style="font-size: 9px;">{{post.userName}}</span></button>
+            <img class="staffLogo" src="../../assets/staff.png"/>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card-content style="font-size: 14px; padding-top:15px;">
+          <div *ngIf="!editing[i]" [innerHtml]="this.sanitizer.bypassSecurityTrustHtml(post.text ?? '')"></div>
+          <div class="NgxEditor__Wrapper" *ngIf="editing[i]">
+            <ngx-editor-menu [editor]="editors[i]" [toolbar]="toolbar"> </ngx-editor-menu>
+            <ngx-editor
+              [editor]="editors[i]"
+              [(ngModel)]="post.text"
+              [disabled]="!editing[i]"
+              [placeholder]="'Type here...'"
+            ></ngx-editor>
+          </div>
+        </mat-card-content>
+        <div style="display:inline-flex;width:100%">
+          <div style="display:inline-flex;width:90%"></div>
+            <div class="rightFloat">
+              <button mat-raised-button style="color: white;" class="EditButton" disabled *ngIf="this.posts[i].id">
+                <span class="blueText" style="font-size: 9px;">Posted {{this.pipe.transform(post.postDate, 'MM/dd/yyyy hh:mm:ss a')}} EST</span>
+              </button>
+              <!-- <button mat-raised-button style="color: white;" class="EditButton" disabled *ngIf="!(post.changedDate?.getTime() === post.postDate?.getTime())">
+                <span class="blueText" style="font-size: 9px;">Edited {{this.pipe.transform(post.changedDate, 'MM/dd/yyyy hh:mm:ss a')}} EST</span>
+              </button> -->
+              <button mat-raised-button color="primary" (click)="editSave(i)" class="EditButton" *ngIf="authService.getIsAdmin() == '1'">
+                {{this.editing[i] ? "Save" : "Edit"}}
+              </button>
+              <button mat-raised-button color="warn" (click)="deletePost(i)" class="EditButton" *ngIf="authService.getIsAdmin() == '1'">
+                {{this.posts[i].id ? "Delete" : "Cancel"}}
+              </button>
+            </div>
+        </div>
+    </mat-card>
+  </span>
+  <button mat-raised-button color="primary" (click)="newPost()" style="margin-left:auto;right:0px;" *ngIf="authService.getIsAdmin() == '1'">New Post</button>
+</div>

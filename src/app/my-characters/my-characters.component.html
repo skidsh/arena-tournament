@@ -1,0 +1,11 @@
+<div class="center-card260">
+  <h2 style="padding-bottom:10px;">My Characters</h2>
+  <mat-card  *ngIf="loading">
+    <mat-spinner diameter="50" class="centered"></mat-spinner>
+  </mat-card>
+  <mat-card class="my-char-card"  *ngIf="!loading">
+    <mat-card-content>
+      <app-character-row *ngFor="let char of _chars" [char]=char></app-character-row>
+    </mat-card-content>
+  </mat-card>
+</div>

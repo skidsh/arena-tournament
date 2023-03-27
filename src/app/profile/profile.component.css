@@ -1,0 +1,9 @@
+.sideProfile {
+  margin-right: 100px;
+  height: 100%;
+  width: 260px; /* A fixed width as the default */
+}
+
+.sideProfile + .side {
+  margin-right: 2%;
+}

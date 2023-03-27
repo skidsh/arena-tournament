@@ -1,0 +1,39 @@
+.stat-pane {
+  position: relative;
+  /* height: 250px; */
+  width: 550px;
+  margin: 5px;
+  padding-bottom: 5px;
+}
+
+.bracket {
+  text-align: center;
+  width: 95px;
+}
+
+.name {
+  text-align: center;
+  width: 600px;
+}
+
+.ratings {
+  text-align: center;
+  width: 200px;
+}
+
+table .mat-row:hover {
+  background-color: rgba(240, 248, 255, 0.123);
+  cursor: pointer;
+}
+
+.label-info {
+  display:inline-flex;
+  width: 100px;
+  left: 83%;
+  padding-top:10px;
+  padding-right:0px;
+  margin-right:0px;
+  position: relative;
+  font-size: 9px;
+  color: grey;
+}

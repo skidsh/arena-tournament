@@ -1,0 +1,33 @@
+<div  class="center-card320">
+<h2>Server Status</h2>
+<mat-card>
+    <mat-card-title style="padding-bottom:10px;">
+       {{this.info.name}}
+       <mat-icon style="float:right;">blur_circular</mat-icon>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-spinner *ngIf="loading" diameter="70" class="loader"></mat-spinner>
+    <mat-card-content *ngIf="!loading" style="padding-top:15px;">
+      <p>
+        <span *ngIf="this.info.online" class="online">Online</span>
+        <span *ngIf="!this.info.online" class="offline">Offline</span>
+      </p>
+      <p *ngIf="this.info.online">
+        <span class="title100">Uptime</span>
+        <span>{{this.info.uptime}}</span>
+      </p>
+      <p *ngIf="this.info.online">
+        <span class="title100">Population</span>
+        <span>{{this.info.population}}</span>
+      </p>
+      <p *ngIf="this.info.online">
+        <span class="title100">Online players</span>
+        <span>{{this.info.onlinePlayers}}</span>
+      </p>
+      <p *ngIf="this.info.online">
+        <span class="title100">Average latency</span>
+        <span>{{this.info.averageLatency}}ms</span>
+      </p>
+    </mat-card-content>
+</mat-card>
+</div>

@@ -1,0 +1,92 @@
+.top100 {
+  top:180px;
+}
+.model3d {
+  display: inline-block;
+  height: 370px !important;
+  width: 295px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #000;
+  -moz-box-shadow: 0px 0px 1px 1px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0,0,0,.5);
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,.5);
+}
+
+.paperdoll-text {
+  color: #d6bc76;
+  text-shadow: 2px 2px 2px #1c1c1c;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  margin: 0px;
+}
+
+.paperdoll-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 400px;
+}
+
+.paperdoll {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 400px;
+}
+
+.paperdoll-column {
+  height: 360px;
+  width: 45px;
+}
+
+.paperdoll-left {
+  float: left;
+}
+
+.paperdoll-right {
+  float: right;
+}
+
+.paperdoll-bottom {
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 45px;
+  width: 150px;
+}
+
+.slot-icon-background {
+  display: inline-block;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background-size: 42px 42px;
+  size: 42px 42px;
+  background-repeat: no-repeat;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+.slot-icon-box {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.slot-icon {
+  display: inline-block;
+  position: relative;
+  width: 41px;
+  height: 41px;
+  left: 2px;
+  top: 2px;
+  padding-right: 5px;
+  object-fit: cover;
+  object-position: -2px -2px;
+  border-radius: 4px;
+}

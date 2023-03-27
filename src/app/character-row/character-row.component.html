@@ -1,0 +1,12 @@
+<div class="char-row-link" [routerLink]="['/armory/'+char.name]">
+  <div class="char-row">
+      <span style="display: inline-flex; width: 15px;"></span>
+      <span [style.color]="classColors.get(char.class)" style="display: inline-flex; width: 70px;">{{char.name}}</span>
+      <span style="display: inline-flex; width: 25px;"></span>
+      <img class="icon" src='../assets/race/{{races.get(char.race)}}-{{gender.get(char.gender)}}.webp'
+      title="{{races.get(char?.race)}}">
+      <img class="icon" src='../assets/class/64/{{classes.get(char.class)}}.png'>
+      <img class="icon" src='../assets/spec/{{char.spec.toLowerCase() == "none" ? "" : classes.get(char.class)}}/{{char.spec.toLowerCase()}}.png' title="{{char.spec}}">
+  </div>
+  <mat-divider></mat-divider>
+</div>

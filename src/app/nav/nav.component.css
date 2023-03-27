@@ -1,0 +1,27 @@
+.logo25 {
+    padding-right: 10px;
+    margin: 0px;
+    vertical-align: middle;
+}
+
+.active-route {
+    border-bottom: 1px solid #ff0000;
+    padding-bottom:20px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.nav-bar {
+    display: flex;
+    height: 45px;
+}
+
+.mat-divider {
+    border-top-width: 2px;
+}
+
+.mat-button {
+    line-height: 28px
+}

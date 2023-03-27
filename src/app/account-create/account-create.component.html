@@ -1,0 +1,120 @@
+<div class="nowrap">
+    <mat-card class="center-card400">
+        <mat-card-title style="padding-bottom:10px;">Account Registration</mat-card-title>
+        <mat-divider></mat-divider>
+        <div *ngIf="loading" style="width: 432px;margin-left: -16px;">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <br>
+        <mat-card-content>
+            <div *ngIf="complete">
+                <mat-icon class="greenLarge" style="width:100%" aria-hidden="false" aria-label="home">done</mat-icon>
+                <mat-divider></mat-divider>
+                <p class="textCenterSuccess" style="padding-top:15px;">Your account has been successfully created</p>
+                <button mat-raised-button color="primary" routerLink="/help" class="textCenterSuccess" style="width:45%">How to connect</button>
+                <button mat-raised-button color="primary" routerLink="/profile" class="textCenterSuccess" style="width:45%;float:right">Profile</button>
+            </div>
+            <div *ngIf="errorCreating">
+                <mat-icon class="greenLarge" style="width:100%;color:yellow" aria-hidden="false" aria-label="home">warning</mat-icon>
+                <mat-divider></mat-divider>
+                <p class="textCenterSuccess" style="padding-top:15px;">An error occurred</p>
+                <button mat-raised-button color="primary" onclick="window.location.reload()" class="textCenterSuccess">Reset</button>
+            </div>
+            <mat-stepper orientation="horizontal" [linear]="true" #stepper *ngIf="!complete && !errorCreating"
+             (animationDone)="setFocus()" (selectionChange)="setTargetId($event)">
+                <mat-step [stepControl]="usernameFormGroup">
+                    <form [formGroup]="usernameFormGroup" [class]="loading ? 'disabled' : ''">
+                        <ng-template matStepLabel>Username</ng-template>
+                        <div class="info-box-selected">
+                            <p>An account name between 3 and 32 characters that is used to login to the game and the website</p>
+                        </div>
+                        <div class="field-container">
+                            <mat-form-field class="full-field" floatLabel="never" >
+                                <mat-label>Username</mat-label>
+                                <input type="text" id="input0" autocomplete="username" matInput [(ngModel)]="username"
+                                    tabindex="1" formControlName="usernameCtrl" cdkFocusInitialte required/>
+                                <mat-error *ngIf="userHasError('usernameCtrl', 'required')">Username is required</mat-error>
+                                <mat-error *ngIf="userHasError('usernameCtrl', 'used')">{{username}} is already in use</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <mat-card-actions>
+                            <button type="reset" mat-raised-button color="warn" tabindex="0" (click)="stepper.reset()" style="margin-right: 210px;">Reset</button>
+                            <button mat-raised-button color="primary" tabindex="5"
+                            (click)="validateUsername()" [disabled]="loading">Next</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="emailFormGroup">
+                    <form [formGroup]="emailFormGroup">
+                        <ng-template matStepLabel>Email</ng-template>
+                        <div class="info-box-selected">
+                            <p>A valid email address used to retrieve a forgotten username, reset your password or to login to the
+                                website</p>
+                        </div>
+                        <div class="field-container">
+                            <mat-form-field class="full-field" floatLabel="never">
+                                <mat-label>Email</mat-label>
+                                <input id="input1" type="email" autocomplete="email" matInput [(ngModel)]="email" tabindex="2" formControlName="emailCtrl"
+                                    pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*" required />
+                                <mat-error *ngIf="emailHasError('emailCtrl', 'required')">Email is required</mat-error>
+                                <mat-error *ngIf="emailHasError('emailCtrl', 'pattern')">Invalid email</mat-error>
+                                <mat-error *ngIf="emailHasError('emailCtrl', 'used')">{{email}} is already in use</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <mat-card-actions>
+                            <button mat-raised-button color="warn" tabindex="0" style="margin-right: 210px;" matStepperPrevious>Back</button>
+                            <button mat-raised-button color="primary" tabindex="5"
+                            (click)="validateEmail()" [disabled]="loading">Next</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="passwordFormGroup">
+                    <form [formGroup]="passwordFormGroup">
+                        <ng-template matStepLabel>Password</ng-template>
+                        <div class="info-box-selected">
+                            <p>A password that will be used to login to the game and the website</p>
+                        </div>
+                        <div class="field-container">
+                            <mat-form-field class="full-field" floatLabel="never">
+                                <mat-label>Password</mat-label>
+                                <input matInput [type]="hidePassword ? 'password' : 'text'"
+                                    autocomplete="new-password" [(ngModel)]="password" tabindex="3" (input)="validatePass()"
+                                    formControlName="passwordCtrl" id="input2" required />
+                                <a mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="0"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" (keydown.enter)="$event.preventDefault()"
+                                    [title]="!hidePassword ? 'Hide password' : 'Show password'">
+                                    <mat-icon class="scale15">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                                <mat-error *ngIf="passHasError('passwordCtrl', 'required')">Password is required</mat-error>
+                                <mat-error *ngIf="passHasError('passwordCtrl', 'mismatch')">Passwords must match</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-field" floatLabel="never">
+                                <mat-label>Confirm Password</mat-label>
+                                <input matInput [type]="hideRepeatPassword ? 'password' : 'text'" id="password"
+                                    [(ngModel)]="confirmPassword" autocomplete="password" tabindex="4" formControlName="confirmPassCtrl"
+                                    (input)="validatePass()" required />
+                                <a mat-icon-button matSuffix (click)="hideRepeatPassword = !hideRepeatPassword"
+                                    tabindex="0" [attr.aria-label]="'Hide password'" (keydown.enter)="$event.preventDefault()"
+                                    [attr.aria-pressed]="hideRepeatPassword"
+                                    [title]="!hideRepeatPassword ? 'Hide confirmed password' : 'Show confirmed password'">
+                                    <mat-icon class="scale15">{{hideRepeatPassword ? 'visibility_off' : 'visibility'}}
+                                    </mat-icon>
+                                </a>
+                                <mat-error *ngIf="passHasError('confirmPassCtrl', 'required')">Confirmed password is
+                                    required</mat-error>
+                                <mat-error *ngIf="passHasError('confirmPassCtrl', 'mismatch')">Passwords must match
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <mat-card-actions>
+                            <button mat-raised-button color="warn" tabindex="0" style="margin-right: 210px;" matStepperPrevious>Back</button>
+                            <button mat-raised-button color="primary" tabindex="5" style="margin-left:-60px;"
+                                (click)="createAccount()" (keydown.enter)="createAccount()">Create Account</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-step>
+            </mat-stepper>
+        </mat-card-content>
+    </mat-card>
+</div>
