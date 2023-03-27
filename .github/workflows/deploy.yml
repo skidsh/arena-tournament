@@ -1,0 +1,45 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Replace secret
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: 'src/environments/environment.prod.ts'
+        env:
+          SECRET_API_KEY: ${{ secrets.API_KEY }}
+
+      - name: Build
+        run: npm run build --prod
+
+      - name: Rsync Deploy
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr --delete
+          path: dist/src/app/dist/arena-tournament
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.DEPLOY_HOST }}
+          remote_user: ${{ secrets.DEPLOY_USER }}
+          remote_key: ${{ secrets.DEPLOY_KEY }}
