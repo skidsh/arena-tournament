@@ -18,6 +18,3 @@ updates:
       - 'area: build & ci'
       - 'target: patch'
       - 'action: merge'
-    # Disable version updates
-    # This does not affect security updates
-    open-pull-requests-limit: 0

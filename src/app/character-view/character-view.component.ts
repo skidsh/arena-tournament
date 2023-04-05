@@ -182,7 +182,7 @@ export class CharacterViewComponent implements OnInit {
         {
           $CoT.fullIdList[item][fullId] = true;
         }
-        $CoT.ajaxRequest(`http://wotlk.cavernoftime.com/item=${item}&power=true&ench=${ench}&gems=${gems}`)
+        $CoT.ajaxRequest(`https://wotlk.cavernoftime.com/item=${item}&power=true&ench=${ench}&gems=${gems}`)
         this.initItem(fullId);
         arr[2][fullId].status[0] = 1;
         this.loadItem(i, fullId);
