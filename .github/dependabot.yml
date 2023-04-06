@@ -6,7 +6,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-
+    open-pull-requests-limit: 100
+    
   # Maintain dependencies for npm
   - package-ecosystem: 'npm'
     directory: '/'
@@ -18,3 +19,4 @@ updates:
       - 'area: build & ci'
       - 'target: patch'
       - 'action: merge'
+    open-pull-requests-limit: 100
