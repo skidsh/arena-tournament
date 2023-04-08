@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Validators } from 'ngx-editor';
 import { environment } from 'src/environments/environment';
 import { AzerothAPI } from '../shared/api.client.gen';
@@ -17,10 +17,10 @@ export class AccountManagmentComponent implements OnInit {
   public password : string = "";
   public confirmPassword : string = "";
   public email : string = "";
-  public emailFormGroup: FormGroup;
-  public passwordFormGroup: FormGroup;
+  public emailFormGroup: UntypedFormGroup;
+  public passwordFormGroup: UntypedFormGroup;
 
-  constructor(private _formBuilder: FormBuilder, public authService : AuthService, public _azerothClient : AzerothAPI.Client) {
+  constructor(private _formBuilder: UntypedFormBuilder, public authService : AuthService, public _azerothClient : AzerothAPI.Client) {
     this.emailFormGroup = this._formBuilder.group({
       emailCtrl: ['', Validators.required],
     });

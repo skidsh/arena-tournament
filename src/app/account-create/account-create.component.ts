@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AzerothAPI } from "../shared/api.client.gen";
 import { environment } from 'src/environments/environment';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { AuthService } from '../shared/auth.service';
@@ -26,15 +26,15 @@ export class AccountCreateComponent implements OnInit {
   public confirmPassword : string = "";
   public email : string = "";
 
-  public usernameFormGroup: FormGroup;
-  public emailFormGroup: FormGroup;
-  public passwordFormGroup: FormGroup;
+  public usernameFormGroup: UntypedFormGroup;
+  public emailFormGroup: UntypedFormGroup;
+  public passwordFormGroup: UntypedFormGroup;
 
   private targetId = 'input0';
 
   @ViewChild('stepper') private stepper: MatStepper | undefined;
 
-  constructor(azerothClient : AzerothAPI.Client, private _formBuilder: FormBuilder, public authService: AuthService) {
+  constructor(azerothClient : AzerothAPI.Client, private _formBuilder: UntypedFormBuilder, public authService: AuthService) {
     this._azerothClient = azerothClient;
     this.usernameFormGroup = this._formBuilder.group({
       usernameCtrl: ['', Validators.required],

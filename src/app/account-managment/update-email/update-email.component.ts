@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Validators } from 'ngx-editor';
 import { AzerothAPI } from 'src/app/shared/api.client.gen';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -17,11 +17,11 @@ export class UpdateEmailComponent implements OnInit {
 
   public hideCurrPassword : boolean = true;
 
-  public emailFormGroup: FormGroup;
+  public emailFormGroup: UntypedFormGroup;
 
   public tempPass : string = "";
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
      public authService : AuthService,
      public _azerothClient : AzerothAPI.Client,
      public _snackBar : SnackBarService) {
