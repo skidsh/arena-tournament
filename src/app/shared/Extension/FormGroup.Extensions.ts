@@ -1,6 +1,6 @@
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 
-export function resetForm(form: FormGroup ) {
+export function resetForm(form: UntypedFormGroup ) {
   form.reset();
 
   Object.keys(form.controls).forEach(key => {

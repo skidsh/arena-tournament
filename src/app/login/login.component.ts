@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { MatButton } from '@angular/material/button'
+import { MatLegacyButton as MatButton } from '@angular/material/legacy-button'
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 

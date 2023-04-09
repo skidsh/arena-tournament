@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Validators } from 'ngx-editor';
 import { resetForm } from 'src/app/shared/Extension/FormGroup.Extensions';
 import { SnackBarService } from 'src/app/shared/SnackBar/snack-bar.service';
@@ -15,7 +15,7 @@ import { AuthService } from '../../shared/auth.service';
 export class UpdateUsernameComponent implements OnInit {
   public loading : boolean = false;
 
-  public usernameFormGroup: FormGroup;
+  public usernameFormGroup: UntypedFormGroup;
 
   public hidePassword : boolean = true;
 
@@ -24,7 +24,7 @@ export class UpdateUsernameComponent implements OnInit {
 
   private targetId = 'update-username-input0';
 
-  constructor(private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: UntypedFormBuilder,
     public authService : AuthService,
     public _azerothClient : AzerothAPI.Client,
     private _snackService : SnackBarService) {
