@@ -3,7 +3,7 @@
     <mat-card class="paperdoll-card">
       <mat-card-title>
         <h2 class="paperdoll-text" [innerHtml]="this.sanitizer.bypassSecurityTrustHtml(this.fullCharName)"></h2>
-        <h2 class="paperdoll-text">{{character?.guild ? "<" + character?.guild + ">" : ""}}</h2>
+        <h2 class="paperdoll-text">{{character.guild ? "<" + character.guild + ">" : ""}}</h2>
       </mat-card-title>
       <!-- <mat-spinner class="loader top100" diameter="150" [style.display]="loadingItems.includes(true) ? 'block' : 'none'" ></mat-spinner> -->
       <div class="paperdoll">

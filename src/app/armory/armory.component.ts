@@ -1,9 +1,9 @@
 import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
 import { classColors, classes, gender, races } from "../shared/utility";
 import { AzerothAPI } from "../shared/api.client.gen";
-import {MatPaginator, MatPaginatorIntl, PageEvent} from '@angular/material/paginator';
+import {MatLegacyPaginator as MatPaginator, MatLegacyPaginatorIntl as MatPaginatorIntl, LegacyPageEvent as PageEvent} from '@angular/material/legacy-paginator';
 import { environment } from 'src/environments/environment';
 import { delay, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

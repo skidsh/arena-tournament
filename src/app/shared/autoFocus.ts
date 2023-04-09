@@ -1,5 +1,5 @@
 import { AfterContentInit, Directive, ElementRef, Input, Renderer2, Optional } from "@angular/core";
-import { MatInput } from '@angular/material/input'
+import { MatLegacyInput as MatInput } from '@angular/material/legacy-input'
 
 @Directive({
   selector: "[autoFocusAT]"

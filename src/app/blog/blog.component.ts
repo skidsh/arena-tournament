@@ -6,7 +6,7 @@ import { Editor, Toolbar, toHTML, toDoc } from 'ngx-editor';
 import { schema } from 'ngx-editor/schema';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../shared/auth.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
