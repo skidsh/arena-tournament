@@ -35,7 +35,7 @@ jobs:
         run: npm run build --prod
 
       - name: Rsync Deploy
-        uses: burnett01/rsync-deployments@5.2.1
+        uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --delete
           path: dist/arena-tournament/*
